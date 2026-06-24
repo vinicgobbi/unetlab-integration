@@ -2,10 +2,10 @@ all:
 
 install:
 	mkdir -p "$(DESTDIR)/usr/bin"
-	install -m 755 bin/eve-ng-integration $(DESTDIR)/usr/bin/
+	install -m 755 bin/unetlab-integration $(DESTDIR)/usr/bin/
 	install -m 755 bin/eni-rdp-wrapper $(DESTDIR)/usr/bin/
 	mkdir -p "$(DESTDIR)/usr/share/applications"
-	install -m 644 data/eve-ng-integration.desktop $(DESTDIR)/usr/share/applications/
+	install -m 644 data/unetlab-integration.desktop $(DESTDIR)/usr/share/applications/
 	install -m 644 data/eni-rdp-wrapper.desktop $(DESTDIR)/usr/share/applications/
 	mkdir -p "$(DESTDIR)/usr/share/mime/packages"
 	install -m 644 data/eni-rdp-wrapper.xml $(DESTDIR)/usr/share/mime/packages/
@@ -20,18 +20,18 @@ post-install:
 	update-mime-database -n /usr/share/mime || true
 
 uninstall:
-	-rm -f $(DESTDIR)/usr/bin/eve-ng-integration
+	-rm -f $(DESTDIR)/usr/bin/unetlab-integration
 	-rm -f $(DESTDIR)/usr/bin/eni-rdp-wrapper
-	-rm -f $(DESTDIR)/usr/share/applications/eve-ng-integration.desktop
+	-rm -f $(DESTDIR)/usr/share/applications/unetlab-integration.desktop
 	-rm -f $(DESTDIR)/usr/share/applications/eni-rdp-wrapper.desktop
 	-rm -f $(DESTDIR)/usr/share/mime/packages/eni-rdp-wrapper.xml
 
 defaults:
 	# setup as default handler for the next URL schemes (don't run it as root)
 	mkdir -p $(HOME)/.local/share/applications/
-	xdg-mime default eve-ng-integration.desktop x-scheme-handler/capture
-	xdg-mime default eve-ng-integration.desktop x-scheme-handler/telnet
-	xdg-mime default eve-ng-integration.desktop x-scheme-handler/docker
+	xdg-mime default unetlab-integration.desktop x-scheme-handler/capture
+	xdg-mime default unetlab-integration.desktop x-scheme-handler/telnet
+	xdg-mime default unetlab-integration.desktop x-scheme-handler/docker
 	xdg-mime default eni-rdp-wrapper.desktop application/x-rdp
 
 check_release:

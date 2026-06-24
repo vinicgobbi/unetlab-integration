@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# See https://github.com/SmartFinn/eve-ng-integration
+# See https://github.com/vinicgobbi/unetlab-integration
 
 from __future__ import print_function
 from subprocess import Popen, PIPE
@@ -31,10 +31,12 @@ class Terminal(object):
     def _terminal_emulator_cmd(self):
         if self.override_terminal:
             return self.override_terminal.split()
+        elif self._is_command('ptyxis'):
+            return ['ptyxis', '--']
+        elif self._is_command('gnome-terminal'):
+            return ['gnome-terminal', '--']
         elif self._is_command('x-terminal-emulator'):
             return ['x-terminal-emulator', '-e']
-        elif self._current_desktop('cinnamon', 'gnome', 'unity'):
-            return ['gnome-terminal', '-e']
         elif self._current_desktop('kde'):
             return ['konsole', '-e']
         elif self._current_desktop('lxde', 'lxqt'):
@@ -78,14 +80,16 @@ def main(argv):
         'path': url.path.lstrip('/') or '',
     }
 
+    wireshark_bin = 'flatpak run org.wireshark.Wireshark'
+
     if url.scheme == 'capture':
         if data["host"] in ['127.0.0.1', 'localhost', '::1', '[::1]']:
-            wireshark_cmd = 'wireshark -k -i {path}'.format(**data)
+            wireshark_cmd = '{} -k -i {}'.format(wireshark_bin, data['path'])
             Popen(wireshark_cmd.split())
         else:
             cmd = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
                 -l root {host} tcpdump -i {path} -n -s 0 -U -w -'.format(**data)
-            wireshark_cmd = 'wireshark -k -i -'
+            wireshark_cmd = '{} -k -i -'.format(wireshark_bin)
 
             tcpdump = Popen(cmd.split(), stdout=PIPE, preexec_fn=os.setsid)
             wireshark = Popen(wireshark_cmd.split(), stdin=tcpdump.stdout)

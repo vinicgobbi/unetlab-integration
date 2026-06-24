@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=EVE-NG Integration
-Exec=eve-ng-integration %u
-TryExec=eve-ng-integration
+Name=UNETLab Integration
+Exec=unetlab-integration %u
+TryExec=unetlab-integration
 Type=Application
 Categories=Network;
 MimeType=x-scheme-handler/telnet;x-scheme-handler/capture;x-scheme-handler/docker;

@@ -1,5 +1,5 @@
 #!/bin/sh
-# This file a part of the eve-ng-integration package
+# This file a part of the unetlab-integration package
 
 RDP_FILE="$1"
 

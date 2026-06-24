@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=RDP Wrapper (EVE-NG Integration)
+Name=RDP Wrapper (UNETLab Integration)
 Exec=eni-rdp-wrapper %f
 TryExec=eni-rdp-wrapper
 Type=Application
