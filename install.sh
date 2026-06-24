@@ -13,14 +13,14 @@ _command_exists() { command -v "$@" > /dev/null 2>&1; }
 _msg() { echo "=>" "$@" >&2; }
 
 _unsupported() {
-    cat <<-'EOF' >&2
+    cat << 'EOF' >&2
 
     Your Linux distribution is not supported.
 
     Feel free to ask support for it by opening an issue at:
       https://github.com/vinicgobbi/unetlab-integration/issues
 
-    EOF
+EOF
     exit 1
 }
 
@@ -83,7 +83,7 @@ do_install() {
     # pode ter dinâmicas diferentes de permissão dependendo do sistema
     sudo groupadd -r wireshark 2>/dev/null || true
 
-    cat <<-'EOF' >&2
+    cat << 'EOF' >&2
 
       Do not forget add the user to the wireshark group:
 
@@ -91,7 +91,7 @@ do_install() {
         # again for this change to take effect.
         sudo usermod -a -G wireshark $USER
 
-    EOF
+EOF
 
     exit 0
 }

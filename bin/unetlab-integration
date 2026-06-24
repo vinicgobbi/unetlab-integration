@@ -58,7 +58,7 @@ class Terminal(object):
 
     def execute(self, command):
         if isinstance(command, (str)):
-            command = command.split('\n')
+            command = command.split()
 
         term = self._terminal_emulator_cmd()
 
